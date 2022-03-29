@@ -1,1 +1,1 @@
-# HotorNot
+# Hot-or-Not
