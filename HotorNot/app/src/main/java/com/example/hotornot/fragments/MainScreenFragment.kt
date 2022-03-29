@@ -16,11 +16,8 @@ class MainScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
-
         clickButton()
-
         return binding.root
     }
     

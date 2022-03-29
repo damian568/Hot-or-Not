@@ -21,11 +21,8 @@ class SplashScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
         binding = FragmentSplashScreenBinding.inflate(layoutInflater, container, false)
-
         delayFragment()
-
         return binding.root
     }
 

@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    //button margin
     <dimen name="marginBot">10dp</dimen>
-
-    //mainScreen Fragment
     <dimen name="mainTxtSize">20sp</dimen>
-
-    //splashScreen Fragment
     <dimen name="splashTxtSize">30sp</dimen>
-
-    //CardView
     <dimen name="marginEnd">8dp</dimen>
     <dimen name="padding">8dp</dimen>
     <dimen name="elevation">3dp</dimen>
