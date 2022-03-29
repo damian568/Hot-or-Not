@@ -27,11 +27,11 @@ class SplashScreenFragment : Fragment() {
 
     private fun slowedFragment(){
         Handler(Looper.getMainLooper()).postDelayed({
-            navigateFragment()
+            goToMainScreen()
         }, delayMills.toLong())
     }
 
-    private fun navigateFragment() {
+    private fun goToMainScreen() {
         val action = SplashScreenFragmentDirections.actionSpashScreenFragmentToMainScreenFragment()
         findNavController().navigate(action)
     }
