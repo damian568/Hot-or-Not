@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">Hot or Not</string>
+    <string name="textView_main">Ｏ(≧▽≦)Ｏ</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="not">Not</string>
+    <string name="pesho">Pesho</string>
+    <string name="hot">Hot</string>
+    <string name="stan">Stan</string>
+    <string name="georgi">Georgi</string>
+
+</resources>
