@@ -22,5 +22,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager
                 .findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.findNavController()
+
+        supportActionBar?.hide()
     }
 }

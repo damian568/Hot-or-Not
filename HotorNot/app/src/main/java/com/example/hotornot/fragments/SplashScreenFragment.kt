@@ -7,8 +7,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.hotornot.R
 import com.example.hotornot.databinding.FragmentSplashScreenBinding
+
+const val delayMills = 2000
 
 class SplashScreenFragment : Fragment() {
 
@@ -18,7 +21,7 @@ class SplashScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        // Inflate the layout for this fragment
+
         binding = FragmentSplashScreenBinding.inflate(layoutInflater, container, false)
 
         delayFragment()
@@ -28,14 +31,12 @@ class SplashScreenFragment : Fragment() {
 
     private fun delayFragment(){
         Handler(Looper.getMainLooper()).postDelayed({
-            replaceFragment(MainScreenFragment())
-        }, 3000)
+            replaceFragment()
+        }, delayMills.toLong())
     }
 
-    private fun replaceFragment(fragment: Fragment) {
-        fragmentManager
-            ?.beginTransaction()
-            ?.replace(R.id.navHostFragment, fragment)
-            ?.commit()
+    private fun replaceFragment() {
+        val action = SplashScreenFragmentDirections.actionSpashScreenFragmentToMainScreenFragment()
+        findNavController().navigate(action)
     }
 }

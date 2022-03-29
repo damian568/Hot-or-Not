@@ -16,7 +16,7 @@ class MainScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        // Inflate the layout for this fragment
+
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
 
         clickButton()
