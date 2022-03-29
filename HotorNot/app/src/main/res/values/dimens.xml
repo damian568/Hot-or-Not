@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="marginBot">10dp</dimen>
-    <dimen name="mainTxtSize">20sp</dimen>
-    <dimen name="splashTxtSize">30sp</dimen>
-    <dimen name="marginEnd">8dp</dimen>
-    <dimen name="padding">8dp</dimen>
-    <dimen name="elevation">3dp</dimen>
-    <dimen name="radius">12dp</dimen>
-    <dimen name="marginLayout">5dp</dimen>
+    <dimen name="xsmall_margin_bot">10dp</dimen>
+    <dimen name="xsmall_margin_end">8dp</dimen>
+    <dimen name="xsmall_padding">8dp</dimen>
+    <dimen name="xxxsmall_elevation">3dp</dimen>
+    <dimen name="large_radius">12dp</dimen>
+    <dimen name="xxsmall_margin_layout">5dp</dimen>
+
+    <dimen name="main_text_size_small">20sp</dimen>
+    <dimen name="splash_text_size_large">30sp</dimen>
 
 </resources>

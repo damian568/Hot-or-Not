@@ -17,19 +17,19 @@ class MainScreenFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
-        clickButton()
+        onClickButton()
         return binding.root
     }
     
-    private fun clickButton(){
+    private fun onClickButton(){
         binding.btnRight.setOnClickListener  {
-            binding.imageView.setImageResource(R.drawable.woman)
-            binding.txtName.text = "Kalina"
+            binding.imageView.setImageResource(R.drawable.stan)
+            binding.txtName.text = R.string.stan.toString()
         }
 
         binding.btnLeft.setOnClickListener {
-            binding.imageView.setImageResource(R.drawable.men)
-            binding.txtName.text = "Georgi"
+            binding.imageView.setImageResource(R.drawable.georgi)
+            binding.txtName.text = R.string.georgi.toString()
         }
     }
 }

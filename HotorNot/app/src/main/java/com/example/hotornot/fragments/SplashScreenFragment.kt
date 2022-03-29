@@ -8,10 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.example.hotornot.R
 import com.example.hotornot.databinding.FragmentSplashScreenBinding
 
-const val delayMills = 2000
+const val delayMills = 1000
 
 class SplashScreenFragment : Fragment() {
 
@@ -22,17 +21,17 @@ class SplashScreenFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSplashScreenBinding.inflate(layoutInflater, container, false)
-        delayFragment()
+        slowedFragment()
         return binding.root
     }
 
-    private fun delayFragment(){
+    private fun slowedFragment(){
         Handler(Looper.getMainLooper()).postDelayed({
-            replaceFragment()
+            navigateFragment()
         }, delayMills.toLong())
     }
 
-    private fun replaceFragment() {
+    private fun navigateFragment() {
         val action = SplashScreenFragmentDirections.actionSpashScreenFragmentToMainScreenFragment()
         findNavController().navigate(action)
     }
