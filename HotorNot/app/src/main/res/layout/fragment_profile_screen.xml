@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_profile"
+        tools:context=".fragments.ProfileScreenFragment">
+
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="uploadPicture"
+            android:src="@drawable/profile"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/large_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewProfile">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardViewBasicInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/profileInformation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:paddingHorizontal="@dimen/text_size_small"
+                            android:singleLine="true"
+                            android:text="@string/information"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="italic"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txtFullNameProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_margin"
+                            android:drawableStart="@drawable/ic_baseline_profile_names"
+                            android:drawablePadding="@dimen/medium_margin"
+                            android:singleLine="true"
+                            android:src="@drawable/ic_baseline_profile_names"
+                            android:text="@string/firstname_lastname"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/text_size_small"
+                            android:textStyle="italic"
+                            app:layout_constraintTop_toBottomOf="@id/profileInformation" />
+
+                        <TextView
+                            android:id="@+id/txtEmailProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_margin"
+                            android:drawableStart="@drawable/ic_baseline_email_icon"
+                            android:drawablePadding="@dimen/medium_margin"
+                            android:singleLine="true"
+                            android:src="@drawable/ic_baseline_email_icon"
+                            android:text="@string/email"
+                            android:textSize="@dimen/text_size_small"
+                            app:layout_constraintTop_toBottomOf="@id/txtFullNameProfile" />
+
+                        <TextView
+                            android:id="@+id/txtSexProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/medium_margin"
+                            android:drawableStart="@drawable/ic_baseline_sex_icon"
+                            android:drawablePadding="@dimen/medium_margin"
+                            android:singleLine="true"
+                            android:src="@drawable/ic_baseline_sex_icon"
+                            android:text="@string/sex"
+                            android:textSize="@dimen/text_size_small"
+                            app:layout_constraintTop_toBottomOf="@id/txtEmailProfile" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

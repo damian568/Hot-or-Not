@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="no_dimen">0dp</dimen>
     <dimen name="xsmall_margin_bot">10dp</dimen>
-    <dimen name="xsmall_margin_end">8dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
     <dimen name="xsmall_padding">8dp</dimen>
     <dimen name="xxxsmall_elevation">3dp</dimen>
     <dimen name="large_radius">12dp</dimen>
     <dimen name="xxsmall_margin_layout">5dp</dimen>
+    <dimen name="large_margin">20dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
 
-    <dimen name="main_text_size_small">20sp</dimen>
+    <dimen name="text_size_small">20sp</dimen>
     <dimen name="splash_text_size_large">30sp</dimen>
 
 </resources>
