@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.RegistrationScreenFragment">
@@ -50,14 +50,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/imgReg">
 
                     <EditText
-                        textChangedListener=""
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/firstname"
                         android:inputType="text"
                         android:maxLength="100"
-                        android:maxLines="1"
-                        android:text="" />
+                        android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -74,11 +72,9 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtFirstName">
 
                     <EditText
-                        textChangedListener=""
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/lastname"
-                        android:text=""
                         android:inputType="text"
                         android:maxLength="100"
                         android:maxLines="1" />
@@ -98,12 +94,10 @@
 
                     <EditText
                         android:id="@+id/txtEmail"
-                        textChangedListener=""
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textEmailAddress"
                         android:hint="@string/email"
-                        android:text=""
+                        android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:singleLine="true" />
 
@@ -156,8 +150,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/large_margin"
                     android:layout_marginVertical="@dimen/large_margin"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="@dimen/large_margin"
+                    android:layout_marginTop="@dimen/large_margin"
                     android:hint="@string/registration"
                     android:textAllCaps="true"
                     android:textSize="@dimen/text_size_small"

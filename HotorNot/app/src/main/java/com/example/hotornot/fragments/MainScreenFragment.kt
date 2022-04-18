@@ -18,7 +18,7 @@ class MainScreenFragment : Fragment() {
     ): View {
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
         onClickButton()
-        makeBtnDisappear()
+        buttonVisibility()
         return binding.root
     }
     
@@ -35,12 +35,8 @@ class MainScreenFragment : Fragment() {
         }
     }
 
-    private fun makeBtnDisappear(){
-        if(binding.txtName.text == "Georgi"){
-            binding.btnLeft.visibility
-        }
-        else if (binding.txtName.text == "Stan"){
-            binding.btnRight.visibility
-        }
+    private fun buttonVisibility(){
+        if(binding.txtName.text == "Georgi")binding.btnLeft.visibility
+        else if (binding.txtName.text == "Stan")binding.btnRight.visibility
     }
 }
