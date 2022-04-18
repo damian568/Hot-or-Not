@@ -2,11 +2,30 @@
 
     <string name="app_name">Hot or Not</string>
     <string name="textView_main">Ｏ(≧▽≦)Ｏ</string>
+    <string name="textView_main_change">ヾ(´∀｀○)ﾉ</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="not">Not</string>
     <string name="pesho">Pesho</string>
     <string name="hot">Hot</string>
     <string name="stan">Stan</string>
     <string name="georgi">Georgi</string>
+    <string name="information">Information</string>
+    <string name="firstname_lastname">FirstName + LastName</string>
+    <string name="email">Email</string>
+    <string name="sex">Sex</string>
+    <string name="firstname">FirstName</string>
+    <string name="lastname">LastName</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+    <string name="other">Other</string>
+    <string name="registration">Registration</string>
+
+    <string-array name="interests">
+        <item>Males</item>
+        <item>Females</item>
+        <item>Drag Queens</item>
+        <item>Apache Helicopters</item>
+        <item>Furries</item>
+    </string-array>
 
 </resources>

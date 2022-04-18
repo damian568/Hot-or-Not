@@ -18,6 +18,7 @@ class MainScreenFragment : Fragment() {
     ): View {
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
         onClickButton()
+        buttonVisibility()
         return binding.root
     }
     
@@ -30,6 +31,12 @@ class MainScreenFragment : Fragment() {
         binding.btnLeft.setOnClickListener {
             binding.imageView.setImageResource(R.drawable.georgi)
             binding.txtName.text = R.string.georgi.toString()
+
         }
+    }
+
+    private fun buttonVisibility(){
+        if(binding.txtName.text == "Georgi")binding.btnLeft.visibility
+        else if (binding.txtName.text == "Stan")binding.btnRight.visibility
     }
 }

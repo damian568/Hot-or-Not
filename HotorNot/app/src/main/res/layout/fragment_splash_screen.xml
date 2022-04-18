@@ -23,7 +23,7 @@
             android:id="@+id/txtViewMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/textView_main"
+            android:text="@string/textView_main_change"
             android:textColor="@color/white"
             android:textSize="@dimen/splash_text_size_large"
             app:layout_constraintLeft_toLeftOf="parent"
