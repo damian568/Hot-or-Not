@@ -16,11 +16,19 @@
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.hotornot.fragments.MainScreenFragment"
-        android:label="MainScreenFragment" />
+        android:label="MainScreenFragment" >
+        <action
+            android:id="@+id/action_mainScreenFragment_to_registrationScreenFragment"
+            app:destination="@id/registrationScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registrationScreenFragment"
         android:name="com.example.hotornot.fragments.RegistrationScreenFragment"
-        android:label="Create Account" />
+        android:label="Create Account" >
+        <action
+            android:id="@+id/action_registrationScreenFragment_to_profileScreenFragment"
+            app:destination="@id/profileScreenFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileScreenFragment"
         android:name="com.example.hotornot.fragments.ProfileScreenFragment"

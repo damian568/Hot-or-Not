@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.RegistrationScreenFragment">
+        tools:context=".fragments.RegistrationScreenFragment"
+        android:background="@drawable/gradient_background">
 
-        <com.google.android.material.progressindicator.LinearProgressIndicator
-            android:id="@+id/progressInd"
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:indeterminate="true"
@@ -22,7 +24,7 @@
             android:layout_margin="@dimen/small_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progressInd">
+            app:layout_constraintTop_toBottomOf="@id/progressBar">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -38,7 +40,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtFirstName"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     enableError=""
                     errorText=""
                     android:layout_width="match_parent"
@@ -46,10 +47,12 @@
                     android:layout_marginVertical="@dimen/medium_margin"
                     app:counterEnabled="true"
                     app:counterMaxLength="100"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgReg">
 
                     <EditText
+                        android:id="@+id/firstName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/firstname"
@@ -60,7 +63,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtLastName"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     enableError=""
                     errorText=""
                     android:layout_width="match_parent"
@@ -68,10 +70,12 @@
                     android:layout_marginVertical="@dimen/small_margin"
                     app:counterEnabled="true"
                     app:counterMaxLength="100"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtFirstName">
 
                     <EditText
+                        android:id="@+id/lastName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/lastname"
@@ -83,12 +87,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtEmailReg"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     enableError=""
                     errorText=""
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/small_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtLastName">
 
@@ -108,7 +112,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/large_margin"
                     android:weightSum="3"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtEmailReg">
 
@@ -140,25 +146,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/medium_margin"
+                    android:entries="@array/interests"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rgGender" />
 
                 <Button
                     android:id="@+id/btnReg"
-                    style="@style/Widget.Design.CollapsingToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/large_margin"
                     android:layout_marginVertical="@dimen/large_margin"
-                    android:layout_marginStart="@dimen/large_margin"
                     android:layout_marginTop="@dimen/large_margin"
-                    android:hint="@string/registration"
+                    android:hint="@string/register"
                     android:textAllCaps="true"
+                    android:background="@drawable/custom_button"
                     android:textSize="@dimen/text_size_small"
+                    android:textColor="#FFFF"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/spinnerMenu"
-                    app:rippleColor="@color/cardview_dark_background" />
+                    app:layout_constraintTop_toBottomOf="@id/spinnerMenu" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>

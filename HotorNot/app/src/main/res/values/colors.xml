@@ -10,4 +10,5 @@
     <color name="logo_background_color">#3B1A7F</color>
     <color name="hot">#E9BD18</color>
     <color name="background_profile">#EBE1FF</color>
+    <color name="btn_reg_background">#1e3c72</color>
 </resources>
