@@ -6,17 +6,19 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_profile"
+        android:background="@drawable/gradient_background_profile"
         tools:context=".fragments.ProfileScreenFragment">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/xxbig_width_height"
+            android:layout_height="@dimen/xxbig_width_height"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="uploadPicture"
+            android:scaleType="fitXY"
             android:src="@drawable/profile"
+            android:layout_marginTop="@dimen/xsmall_margin"
+            app:shapeAppearanceOverlay="@style/Circular"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +36,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardViewBasicInfo"
+                    android:id="@+id/Contents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/small_margin"

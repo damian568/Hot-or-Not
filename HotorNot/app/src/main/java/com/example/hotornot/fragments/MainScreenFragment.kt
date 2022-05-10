@@ -1,12 +1,21 @@
 package com.example.hotornot.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.hotornot.R
 import com.example.hotornot.databinding.FragmentMainScreenBinding
+
+const val email = "didi.milenov@gmail.com"
+const val subject = "Friends"
+const val message = "Damian Tsvetkov :zdr bepce ko pr"
 
 class MainScreenFragment : Fragment() {
 
@@ -17,13 +26,27 @@ class MainScreenFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
+        slowedFragment()
         onClickButton()
         buttonVisibility()
+        onClickIcon()
         return binding.root
     }
-    
-    private fun onClickButton(){
-        binding.btnRight.setOnClickListener  {
+
+    private fun slowedFragment(){
+        Handler(Looper.getMainLooper()).postDelayed({
+            goToMainScreen()
+        }, delayMills.toLong())
+    }
+
+    private fun goToMainScreen() {
+        val action =
+            MainScreenFragmentDirections.actionMainScreenFragmentToRegistrationScreenFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun onClickButton() {
+        binding.btnRight.setOnClickListener {
             binding.imageView.setImageResource(R.drawable.stan)
             binding.txtName.text = R.string.stan.toString()
         }
@@ -35,8 +58,21 @@ class MainScreenFragment : Fragment() {
         }
     }
 
-    private fun buttonVisibility(){
-        if(binding.txtName.text == "Georgi")binding.btnLeft.visibility
-        else if (binding.txtName.text == "Stan")binding.btnRight.visibility
+    private fun buttonVisibility() {
+        if (binding.txtName.text == "Georgi") binding.btnLeft.visibility
+        else if (binding.txtName.text == "Stan") binding.btnRight.visibility
+    }
+
+    private fun onClickIcon() {
+        binding.email.setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                putExtra(Intent.EXTRA_SUBJECT, subject)
+                putExtra(Intent.EXTRA_TEXT, message)
+                putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", email, null))
+            }
+            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+        }
     }
 }

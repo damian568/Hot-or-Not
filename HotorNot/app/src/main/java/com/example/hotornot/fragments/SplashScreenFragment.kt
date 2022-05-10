@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.hotornot.databinding.FragmentSplashScreenBinding
 
-const val delayMills = 1000
+const val delayMills = 3000
 
 class SplashScreenFragment : Fragment() {
 

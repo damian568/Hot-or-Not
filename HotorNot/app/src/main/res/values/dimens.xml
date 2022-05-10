@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="no_dimen">0dp</dimen>
-    <dimen name="xsmall_margin_bot">10dp</dimen>
+    <dimen name="xsmall_margin">10dp</dimen>
     <dimen name="small_margin">8dp</dimen>
     <dimen name="xsmall_padding">8dp</dimen>
     <dimen name="xxxsmall_elevation">3dp</dimen>
@@ -13,5 +13,8 @@
 
     <dimen name="text_size_small">20sp</dimen>
     <dimen name="splash_text_size_large">30sp</dimen>
+
+    <dimen name="xxxbig_height">650dp</dimen>
+    <dimen name="xxbig_width_height">250dp</dimen>
 
 </resources>
