@@ -4,36 +4,37 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.hotornot.PreferencesUtil
-import com.example.hotornot.R
-import com.example.hotornot.UserSharedPreference
+import com.example.hotornot.data.User
 import com.example.hotornot.databinding.FragmentProfileScreenBinding
 
-class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
+class ProfileScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileScreenBinding
-    private val preference = context?.let { UserSharedPreference(it) }
-    private val preferencesUtil: PreferencesUtil? = context?.let { PreferencesUtil.getInstance(it) }
-
-    companion object {
-        val IMAGE_REQUEST_CODE = 1_000;
-    }
+    private lateinit var preferencesUtil: PreferencesUtil
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentProfileScreenBinding.inflate(layoutInflater, container, false)
-        changeImage()
-        printUserInfo()
         return binding.root
     }
 
-    private fun printUserInfo(){
-        binding.txtFullNameProfile.text = preferencesUtil?.getUserData()?.firstName
-        binding.txtFullNameProfile.text = preferencesUtil?.getUserData()?.lastName
-        binding.txtEmailProfile.text = preferencesUtil?.getUserData()?.email
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        preferencesUtil = PreferencesUtil.getInstance(view.context)
+        val user = preferencesUtil.getUserData()
+        user?.let { printUserInfo(it) }
+        changeImage()
+    }
+
+    private fun printUserInfo(user: User?) {
+        binding.txtFullNameProfile.text = user?.firstName + " " +  user?.lastName
+        binding.txtEmailProfile.text = user?.email
+        binding.txtSexProfile.text = user?.gender.toString()
     }
 
     private fun changeImage() {
@@ -45,12 +46,12 @@ class ProfileScreenFragment : Fragment(R.layout.fragment_profile_screen) {
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+        resultLauncher.launch(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val data: Intent? = result.data
             binding.imageViewProfile.setImageURI(data?.data)
         }
     }

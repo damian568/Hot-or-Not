@@ -2,6 +2,7 @@ package com.example.hotornot
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.hotornot.data.User
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -39,9 +40,9 @@ class PreferencesUtil internal constructor(private val context: Context) {
     companion object {
 
         private lateinit var sPref: SharedPreferences
-        private const val PREF_FILE_NAME = "com.volasoftware.hotornot.data.local"
-        private const val PREF_SERIALIZABLE_USER = "com.volasoftware.hotornot.data.local.PREF_USER"
-        private const val PREF_SERIALIZABLE_FRIENDS = "com.volasoftware.hotornot.data.local.PREF_FRIENDS"
+        private const val PREF_FILE_NAME = "com.example.hotornot"
+        private const val PREF_SERIALIZABLE_USER = "com.example.hotornot"
+//        private const val PREF_SERIALIZABLE_FRIENDS = "com.volasoftware.hotornot.data.local.PREF_FRIENDS"
         private var instance: PreferencesUtil? = null
         fun getInstance(context: Context): PreferencesUtil {
             if (instance == null) {

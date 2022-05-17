@@ -12,14 +12,17 @@
         <action
             android:id="@+id/action_spashScreenFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
+        <action
+            android:id="@+id/action_spashScreenFragment_to_registrationScreenFragment"
+            app:destination="@id/registrationScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainScreenFragment"
         android:name="com.example.hotornot.fragments.MainScreenFragment"
         android:label="Home" >
         <action
-            android:id="@+id/action_mainScreenFragment_to_registrationScreenFragment"
-            app:destination="@id/registrationScreenFragment" />
+            android:id="@+id/action_mainScreenFragment_to_profileScreenFragment"
+            app:destination="@id/profileScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationScreenFragment"

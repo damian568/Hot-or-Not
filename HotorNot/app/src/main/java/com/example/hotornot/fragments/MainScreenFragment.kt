@@ -3,13 +3,10 @@ package com.example.hotornot.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.example.hotornot.R
 import com.example.hotornot.databinding.FragmentMainScreenBinding
 
@@ -26,23 +23,14 @@ class MainScreenFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
-        slowedFragment()
-        onClickButton()
-        buttonVisibility()
-        onClickIcon()
         return binding.root
     }
 
-    private fun slowedFragment(){
-        Handler(Looper.getMainLooper()).postDelayed({
-            goToMainScreen()
-        }, delayMills.toLong())
-    }
-
-    private fun goToMainScreen() {
-        val action =
-            MainScreenFragmentDirections.actionMainScreenFragmentToRegistrationScreenFragment()
-        findNavController().navigate(action)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onClickButton()
+        buttonVisibility()
+        sendMessageToFriend()
     }
 
     private fun onClickButton() {
@@ -54,7 +42,6 @@ class MainScreenFragment : Fragment() {
         binding.btnLeft.setOnClickListener {
             binding.imageView.setImageResource(R.drawable.georgi)
             binding.txtName.text = R.string.georgi.toString()
-
         }
     }
 
@@ -63,7 +50,7 @@ class MainScreenFragment : Fragment() {
         else if (binding.txtName.text == "Stan") binding.btnRight.visibility
     }
 
-    private fun onClickIcon() {
+    private fun sendMessageToFriend() {
         binding.email.setOnClickListener {
             val emailIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"

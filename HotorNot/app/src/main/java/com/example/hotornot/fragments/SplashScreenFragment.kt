@@ -8,31 +8,49 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.databinding.FragmentSplashScreenBinding
 
-const val delayMills = 3000
+const val Delay_Mills = 3000
 
 class SplashScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashScreenBinding
+    private lateinit var preferencesUtil: PreferencesUtil
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSplashScreenBinding.inflate(layoutInflater, container, false)
-        slowedFragment()
         return binding.root
     }
 
-    private fun slowedFragment(){
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        preferencesUtil = PreferencesUtil.getInstance(view.context)
+        slowedFragment()
+    }
+
+    private fun slowedFragment() {
+        val user = preferencesUtil.getUserData()
         Handler(Looper.getMainLooper()).postDelayed({
-            goToMainScreen()
-        }, delayMills.toLong())
+            if (user == null) {
+                goToRegistrationScreen()
+            } else {
+                goToMainScreen()
+            }
+        }, Delay_Mills.toLong())
     }
 
     private fun goToMainScreen() {
         val action = SplashScreenFragmentDirections.actionSpashScreenFragmentToMainScreenFragment()
+        findNavController().navigate(action)
+    }
+
+    private fun goToRegistrationScreen() {
+        val action =
+            SplashScreenFragmentDirections.actionSpashScreenFragmentToRegistrationScreenFragment()
         findNavController().navigate(action)
     }
 }

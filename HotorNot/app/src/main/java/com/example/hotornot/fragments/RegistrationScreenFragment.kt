@@ -1,8 +1,6 @@
 package com.example.hotornot.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -16,13 +14,14 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.hotornot.*
+import com.example.hotornot.data.User
+import com.example.hotornot.enums.Gender
 import com.example.hotornot.databinding.FragmentRegistrationScreenBinding
 
 class RegistrationScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationScreenBinding
-    private val preference = context?.let { UserSharedPreference(it) }
-    private val preferencesUtil: PreferencesUtil? = context?.let { PreferencesUtil.getInstance(it) }
+    private lateinit var preferencesUtil: PreferencesUtil
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,13 +29,17 @@ class RegistrationScreenFragment : Fragment() {
     ): View {
         binding = FragmentRegistrationScreenBinding.inflate(layoutInflater, container, false)
         binding.imgReg.setImageResource(R.drawable.ic_friends_logo)
-        binding.progressBar.visibility = View.INVISIBLE
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        preferencesUtil = PreferencesUtil.getInstance(view.context)
         onFirstNameTextChangeListener()
         onLastNameTextChangeListener()
         onEmailTextChangeListener()
         showInterests()
-        goToProfileScreen()
-        return binding.root
+        isRegisterUser()
     }
 
     private fun onFirstNameTextChangeListener() {
@@ -96,10 +99,6 @@ class RegistrationScreenFragment : Fragment() {
         return null
     }
 
-    private fun isValidString(str: String): Boolean {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
-    }
-
     private fun showInterests() {
         val arrayAdapter = ArrayAdapter(requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
@@ -122,50 +121,55 @@ class RegistrationScreenFragment : Fragment() {
                     "Please select one of our options!",
                     Toast.LENGTH_LONG).show()
             }
-
         }
     }
 
-    private fun goToProfileScreen() {
+    private fun createUser() {
+        val firstName = binding.firstName.text.toString()
+        val lastName = binding.lastName.text.toString()
+        val email = binding.txtEmail.text.toString()
+
+        val user = User(
+            firstName,
+            lastName,
+            email,
+            getSelectRadioBtnValue(), ""
+        )
+        preferencesUtil.saveUserData(user)
+    }
+
+    private fun getSelectRadioBtnValue() =
+        when (binding.rgGender.checkedRadioButtonId) {
+            R.id.btnRadioMan -> Gender.Male
+            R.id.btnRadioWoman -> Gender.Female
+            R.id.btnRadioOther -> Gender.Other
+            else -> Gender.Other
+        }
+
+    private fun isRegisterUser() {
         binding.btnReg.setOnClickListener {
-            val firstName = binding.txtFirstName.editText?.text.toString()
-            val lastName = binding.txtLastName.editText?.text.toString()
-            val email = binding.txtEmailReg.editText?.text.toString()
-            val user = User(firstName, lastName, email)
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.progressBar.visibility = View.VISIBLE
-
-                if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName)) {
-                }
-                if (isValidString(email)) {
-                    preferencesUtil?.saveUserData(user)
-//                    preference?.saveUserDates(firstName, lastName, email)
-                    val action =
-                        RegistrationScreenFragmentDirections.actionRegistrationScreenFragmentToMainScreenFragment()
-                    findNavController().navigate(action)
-                }
-            }, delayMills.toLong())
-            binding.progressBar.visibility = View.GONE
+            isItEmpty()
         }
+    }
 
-        fun saveUserData() {
-            preference?.putString(Constants.keyFirstName, binding.firstName.text.toString())
-            preference?.putString(Constants.keyLastName, binding.lastName.text.toString())
-            preference?.putString(Constants.keyEmail, binding.txtEmail.text.toString())
-            when (binding.rgGender.checkedRadioButtonId) {
-                R.id.btnRadioMan -> {
-                    preference?.putBoolean(Constants.keyGender,
-                        binding.rgGender.checkedRadioButtonId == R.id.btnRadioMan)
-                }
-                R.id.btnRadioWoman -> {
-                    preference?.putBoolean(Constants.keyGender,
-                        binding.rgGender.checkedRadioButtonId == R.id.btnRadioWoman)
-                }
-                R.id.btnRadioOther -> {
-                    preference?.putBoolean(Constants.keyGender,
-                        binding.rgGender.checkedRadioButtonId == R.id.btnRadioOther)
-                }
-            }
+    private fun isItEmpty() {
+        val firstName = binding.txtFirstName.editText?.text.toString()
+        val lastName = binding.txtLastName.editText?.text.toString()
+        val email = binding.txtEmailReg.editText?.text.toString()
+
+        if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(
+                email)
+        ) {
+            Toast.makeText(this.context, "Field is required!", Toast.LENGTH_SHORT).show()
+        } else {
+            createUser()
+            goToNextScreen()
         }
+    }
+
+    private fun goToNextScreen() {
+        val action =
+            RegistrationScreenFragmentDirections.actionRegistrationScreenFragmentToMainScreenFragment()
+        findNavController().navigate(action)
     }
 }

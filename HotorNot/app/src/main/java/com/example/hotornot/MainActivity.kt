@@ -1,6 +1,7 @@
 package com.example.hotornot
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
@@ -9,8 +10,10 @@ import android.graphics.PorterDuff
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
@@ -21,14 +24,17 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.hotornot.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var preferencesUtil: PreferencesUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        preferencesUtil = PreferencesUtil.getInstance(applicationContext)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
         loadingFragments()
     }
@@ -41,7 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController)
-
     }
 
     @SuppressLint("RestrictedApi")
@@ -84,6 +89,7 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Are you sure!")
         builder.setMessage("Do you want to close the app?")
         builder.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
+            preferencesUtil.deleteUser()
             finish()
         }
         builder.setNegativeButton("No") { _: DialogInterface, _: Int -> }

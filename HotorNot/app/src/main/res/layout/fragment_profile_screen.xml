@@ -67,7 +67,6 @@
                             android:drawablePadding="@dimen/medium_margin"
                             android:singleLine="true"
                             android:src="@drawable/ic_baseline_profile_names"
-                            android:text="@string/firstname_lastname"
                             android:textAllCaps="true"
                             android:textSize="@dimen/text_size_small"
                             android:textStyle="italic"
@@ -82,7 +81,6 @@
                             android:drawablePadding="@dimen/medium_margin"
                             android:singleLine="true"
                             android:src="@drawable/ic_baseline_email_icon"
-                            android:text="@string/email"
                             android:textSize="@dimen/text_size_small"
                             app:layout_constraintTop_toBottomOf="@id/txtFullNameProfile" />
 
@@ -95,7 +93,6 @@
                             android:drawablePadding="@dimen/medium_margin"
                             android:singleLine="true"
                             android:src="@drawable/ic_baseline_sex_icon"
-                            android:text="@string/sex"
                             android:textSize="@dimen/text_size_small"
                             app:layout_constraintTop_toBottomOf="@id/txtEmailProfile" />
 
