@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import com.example.hotornot.R
 import com.example.hotornot.databinding.FragmentMainScreenBinding
 
-const val email = "didi.milenov@gmail.com"
-const val subject = "Friends"
-const val message = "Damian Tsvetkov :zdr bepce ko pr"
+const val EMAIL = "didi.milenov@gmail.com"
+const val SUBJECT = "Friends"
+const val MESSAGE = "Damian Tsvetkov :zdr bepce ko pr"
 
 class MainScreenFragment : Fragment() {
 
@@ -54,10 +54,10 @@ class MainScreenFragment : Fragment() {
         binding.email.setOnClickListener {
             val emailIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
-                putExtra(Intent.EXTRA_SUBJECT, subject)
-                putExtra(Intent.EXTRA_TEXT, message)
-                putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", email, null))
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(EMAIL))
+                putExtra(Intent.EXTRA_SUBJECT, SUBJECT)
+                putExtra(Intent.EXTRA_TEXT, MESSAGE)
+                putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", EMAIL, null))
             }
             startActivity(Intent.createChooser(emailIntent, "Send email..."))
         }

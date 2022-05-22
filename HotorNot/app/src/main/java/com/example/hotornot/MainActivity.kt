@@ -1,7 +1,6 @@
 package com.example.hotornot
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.DialogInterface
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
@@ -10,10 +9,8 @@ import android.graphics.PorterDuff
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
@@ -24,7 +21,6 @@ import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.hotornot.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,26 +45,38 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
     }
 
-    @SuppressLint("RestrictedApi")
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        setIconInMenu(menu)
+        setColorOnIcon(menu)
+        return true
+    }
+
+    @SuppressLint("RestrictedApi")
+    private fun setIconInMenu(menu: Menu?){
         if (menu is MenuBuilder) {
             menu.setOptionalIconsVisible(true)
         }
+    }
+
+    private fun setColorOnIcon(menu: Menu?){
         menu?.apply {
             for(index in 0 until this.size()){
                 val item = this.getItem(index)
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    item.icon.colorFilter = BlendModeColorFilter(
-                        Color.BLUE, BlendMode.SRC_IN
-                    )
-                }else{
-                    item.icon.setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN)
-                }
+                setColorItem(item)
             }
         }
-        return true
+    }
+
+    private fun setColorItem(item: MenuItem){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            item.icon.colorFilter = BlendModeColorFilter(
+                Color.BLUE, BlendMode.SRC_IN
+            )
+        }else{
+            item.icon.setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -86,6 +94,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun closingAppQuestion() {
         val builder = AlertDialog.Builder(this)
+        isBuildingAlertDialog(builder)
+    }
+
+    private fun isBuildingAlertDialog(builder: AlertDialog.Builder){
         builder.setTitle("Are you sure!")
         builder.setMessage("Do you want to close the app?")
         builder.setPositiveButton("Yes") { _: DialogInterface, _: Int ->

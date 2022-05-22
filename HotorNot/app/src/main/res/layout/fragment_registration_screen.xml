@@ -160,7 +160,7 @@
                     android:textAllCaps="true"
                     android:background="@drawable/custom_button"
                     android:textSize="@dimen/text_size_small"
-                    android:textColor="#FFFF"
+                    android:textColor="@color/white"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

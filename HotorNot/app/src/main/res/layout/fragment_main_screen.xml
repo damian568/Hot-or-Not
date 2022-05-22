@@ -73,9 +73,9 @@
             android:text="@string/not"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnRight"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="@integer/horizontal_bias"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.33" />
+            app:layout_constraintWidth_percent="@integer/width_percent" />
 
         <Button
             android:id="@+id/btnRight"
@@ -86,9 +86,9 @@
             android:text="@string/hot"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_bias="@integer/horizontal_bias"
             app:layout_constraintStart_toEndOf="@+id/btnLeft"
-            app:layout_constraintWidth_percent="0.33" />
+            app:layout_constraintWidth_percent="@integer/width_percent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
