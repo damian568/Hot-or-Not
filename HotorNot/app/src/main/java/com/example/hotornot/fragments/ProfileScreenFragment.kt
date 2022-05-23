@@ -4,9 +4,11 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.example.hotornot.PreferencesUtil
+import com.example.hotornot.R
 import com.example.hotornot.data.User
 import com.example.hotornot.databinding.FragmentProfileScreenBinding
 
@@ -32,7 +34,7 @@ class ProfileScreenFragment : Fragment() {
     }
 
     private fun printUserInfo(user: User?) {
-        binding.txtFullNameProfile.text = user?.firstName + " " +  user?.lastName
+        binding.txtFullNameProfile.text = user?.firstName + " " + user?.lastName
         binding.txtEmailProfile.text = user?.email
         binding.txtSexProfile.text = user?.gender.toString()
     }
@@ -45,14 +47,18 @@ class ProfileScreenFragment : Fragment() {
 
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        resultLauncher.launch(intent)
+        intent.type = R.string.image_text.toString()
+        openGalleryInNewActivity(intent)
     }
 
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val data: Intent? = result.data
-            binding.imageViewProfile.setImageURI(data?.data)
-        }
+    private fun openGalleryInNewActivity(intent: Intent) {
+        var resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val data: Intent? = result.data
+                    binding.imageViewProfile.setImageURI(data?.data)
+                }
+            }
+        resultLauncher.launch(intent)
     }
 }

@@ -30,4 +30,20 @@
         <item>Furries</item>
     </string-array>
 
+    <string name="return_text">Can\'t be empty!</string>
+    <string name="return_email_text">Invalid Email Address!</string>
+
+    <string name="image_text">image/*</string>
+
+    <string name="select_toast">You select </string>
+    <string name="error_toast">Please select one of our options!</string>
+    <string name="field_toast">Field is required!</string>
+
+    <string name="text_alert_dialog">Are you sure!</string>
+    <string name="question_alert_dialog">Do you want to close the app?</string>
+    <string name="yes_alert_dialog">Yes</string>
+    <string name="no_alert_dialog">No</string>
+
+    <string name="type_email_intent">"text/plain"</string>
+
 </resources>

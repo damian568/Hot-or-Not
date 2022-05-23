@@ -28,12 +28,12 @@ class MainScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onClickButton()
-        buttonVisibility()
+        showRandomImage()
+        buttonsVisibility()
         sendMessageToFriend()
     }
 
-    private fun onClickButton() {
+    private fun showRandomImage() {
         binding.btnRight.setOnClickListener {
             binding.imageView.setImageResource(R.drawable.stan)
             binding.txtName.text = R.string.stan.toString()
@@ -45,7 +45,7 @@ class MainScreenFragment : Fragment() {
         }
     }
 
-    private fun buttonVisibility() {
+    private fun buttonsVisibility() {
         if (binding.txtName.text == "Georgi") binding.btnLeft.visibility
         else if (binding.txtName.text == "Stan") binding.btnRight.visibility
     }
@@ -53,7 +53,7 @@ class MainScreenFragment : Fragment() {
     private fun sendMessageToFriend() {
         binding.email.setOnClickListener {
             val emailIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
+                type = R.string.type_email_intent.toString()
                 putExtra(Intent.EXTRA_EMAIL, arrayOf(EMAIL))
                 putExtra(Intent.EXTRA_SUBJECT, SUBJECT)
                 putExtra(Intent.EXTRA_TEXT, MESSAGE)

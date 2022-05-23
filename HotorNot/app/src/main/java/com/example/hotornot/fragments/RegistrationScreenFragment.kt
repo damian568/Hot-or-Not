@@ -28,18 +28,22 @@ class RegistrationScreenFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentRegistrationScreenBinding.inflate(layoutInflater, container, false)
-        binding.imgReg.setImageResource(R.drawable.ic_friends_logo)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preferencesUtil = PreferencesUtil.getInstance(view.context)
+        setLogoImage()
         onFirstNameTextChangeListener()
         onLastNameTextChangeListener()
         onEmailTextChangeListener()
         showInterests()
-        isRegisterUser()
+        registerUser()
+    }
+
+    private fun setLogoImage() {
+        binding.imgReg.setImageResource(R.drawable.ic_friends_logo)
     }
 
     private fun onFirstNameTextChangeListener() {
@@ -47,7 +51,7 @@ class RegistrationScreenFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.txtFirstName.error = isEmptyFirstName()
+                binding.txtFirstName.error = checkIsItEmptyFirstName()
                 binding.btnReg.isEnabled = true
             }
         })
@@ -58,7 +62,7 @@ class RegistrationScreenFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.txtLastName.error = isEmptyLastName()
+                binding.txtLastName.error = checkIsItEmptyLastName()
                 binding.btnReg.isEnabled = true
             }
         })
@@ -69,41 +73,45 @@ class RegistrationScreenFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.txtEmailReg.error = isValidEmail()
+                binding.txtEmailReg.error = checkIsItValidEmail()
                 binding.btnReg.isEnabled = true
             }
         })
     }
 
-    private fun isEmptyFirstName(): String? {
+    private fun checkIsItEmptyFirstName(): String? {
         val firstName = binding.firstName.text.toString()
         if (TextUtils.isEmpty(firstName)) {
-            return "Can't be empty!"
+            return R.string.return_text.toString()
         }
         return null
     }
 
-    private fun isEmptyLastName(): String? {
+    private fun checkIsItEmptyLastName(): String? {
         val firstName = binding.lastName.text.toString()
         if (TextUtils.isEmpty(firstName)) {
-            return "Can't be empty!"
+            return R.string.return_text.toString()
         }
         return null
     }
 
-    private fun isValidEmail(): String? {
+    private fun checkIsItValidEmail(): String? {
         val emailText = binding.txtEmail.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-            return "Invalid Email Address!"
+            return R.string.return_email_text.toString()
         }
         return null
     }
 
-    private fun showInterests() {
+    private fun reloadingAdapter() {
         val arrayAdapter = ArrayAdapter(requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
             resources.getStringArray(R.array.interests))
         binding.spinnerMenu.adapter = arrayAdapter
+    }
+
+    private fun showInterests() {
+        reloadingAdapter()
         binding.spinnerMenu.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -111,17 +119,25 @@ class RegistrationScreenFragment : Fragment() {
                 position: Int,
                 id: Long,
             ) {
-                Toast.makeText(requireContext(),
-                    "You select " + resources.getStringArray(R.array.interests)[position],
-                    Toast.LENGTH_LONG).show()
+                showItemSelectedToast(position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(requireContext(),
-                    "Please select one of our options!",
-                    Toast.LENGTH_LONG).show()
+                showErrorToastInInterests()
             }
         }
+    }
+
+    private fun showItemSelectedToast(position: Int) {
+        Toast.makeText(requireContext(),
+            R.string.select_toast.toString() + resources.getStringArray(R.array.interests)[position],
+            Toast.LENGTH_LONG).show()
+    }
+
+    private fun showErrorToastInInterests() {
+        Toast.makeText(requireContext(),
+            R.string.error_toast.toString(),
+            Toast.LENGTH_LONG).show()
     }
 
     private fun createUser() {
@@ -133,41 +149,48 @@ class RegistrationScreenFragment : Fragment() {
             firstName,
             lastName,
             email,
-            getSelectRadioBtnValue(), ""
+            getSelectRadioBtnValue(), getSelectInterest()
         )
         preferencesUtil.saveUserData(user)
     }
 
     private fun getSelectRadioBtnValue() =
-        when (binding.rgGender.checkedRadioButtonId) {
+        when (binding.radioGroupGender.checkedRadioButtonId) {
             R.id.btnRadioMan -> Gender.Male
             R.id.btnRadioWoman -> Gender.Female
             R.id.btnRadioOther -> Gender.Other
             else -> Gender.Other
         }
 
-    private fun isRegisterUser() {
+    private fun registerUser() {
         binding.btnReg.setOnClickListener {
-            isItEmpty()
+            checkIsItEmpty()
         }
     }
 
-    private fun isItEmpty() {
+    private fun getSelectInterest(): String {
+        return " "
+    }
+
+    private fun checkIsItEmpty() {
         val firstName = binding.txtFirstName.editText?.text.toString()
         val lastName = binding.txtLastName.editText?.text.toString()
         val email = binding.txtEmailReg.editText?.text.toString()
 
-        if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(
-                email)
+        if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(lastName) || TextUtils.isEmpty(email)
         ) {
-            Toast.makeText(this.context, "Field is required!", Toast.LENGTH_SHORT).show()
+            showErrorToastVerification()
         } else {
             createUser()
-            goToNextScreen()
+            goToMainScreenFragment()
         }
     }
 
-    private fun goToNextScreen() {
+    private fun showErrorToastVerification() {
+        Toast.makeText(this.context, R.string.field_toast.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goToMainScreenFragment() {
         val action =
             RegistrationScreenFragmentDirections.actionRegistrationScreenFragmentToMainScreenFragment()
         findNavController().navigate(action)

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.databinding.FragmentSplashScreenBinding
 
-const val Delay_Mills = 3000
+const val DELAY_MILLS = 3000
 
 class SplashScreenFragment : Fragment() {
 
@@ -40,7 +40,7 @@ class SplashScreenFragment : Fragment() {
             } else {
                 goToMainScreen()
             }
-        }, Delay_Mills.toLong())
+        }, DELAY_MILLS.toLong())
     }
 
     private fun goToMainScreen() {

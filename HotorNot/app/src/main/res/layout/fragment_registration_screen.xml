@@ -107,7 +107,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <RadioGroup
-                    android:id="@+id/rgGender"
+                    android:id="@+id/radioGroupGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -147,7 +147,7 @@
                     android:layout_margin="@dimen/medium_margin"
                     android:entries="@array/interests"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rgGender" />
+                    app:layout_constraintTop_toBottomOf="@id/radioGroupGender" />
 
                 <Button
                     android:id="@+id/btnReg"
