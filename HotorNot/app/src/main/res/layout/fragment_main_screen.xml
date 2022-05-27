@@ -6,6 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/btn_reg_background"
         tools:context=".fragments.MainScreenFragment">
 
         <androidx.cardview.widget.CardView
@@ -45,6 +46,21 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/medium_margin"
+                    android:drawableStart="@drawable/ic_baseline_email_icon"
+                    android:drawablePadding="@dimen/medium_margin"
+                    android:src="@drawable/ic_baseline_email_icon"
+                    android:text="@string/email"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="italic"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -52,27 +68,27 @@
             android:id="@+id/btnLeft"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/xsmall_margin_bot"
+            android:layout_marginBottom="@dimen/xsmall_margin"
             android:background="@color/teal_700"
             android:text="@string/not"
-            app:layout_constraintWidth_percent="0.33"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnRight"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="@integer/horizontal_bias"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="@integer/width_percent" />
 
         <Button
             android:id="@+id/btnRight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/xsmall_margin_bot"
+            android:layout_marginBottom="@dimen/xsmall_margin"
             android:background="@color/hot"
             android:text="@string/hot"
-            app:layout_constraintWidth_percent="0.33"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btnLeft" />
+            app:layout_constraintHorizontal_bias="@integer/horizontal_bias"
+            app:layout_constraintStart_toEndOf="@+id/btnLeft"
+            app:layout_constraintWidth_percent="@integer/width_percent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,5 +1,7 @@
 package com.example.hotornot.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.hotornot.R
 import com.example.hotornot.databinding.FragmentMainScreenBinding
+
+const val EMAIL = "didi.milenov@gmail.com"
+const val SUBJECT = "Friends"
+const val MESSAGE = "Damian Tsvetkov :zdr bepce ko pr"
 
 class MainScreenFragment : Fragment() {
 
@@ -17,13 +23,18 @@ class MainScreenFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentMainScreenBinding.inflate(layoutInflater, container, false)
-        onClickButton()
-        buttonVisibility()
         return binding.root
     }
-    
-    private fun onClickButton(){
-        binding.btnRight.setOnClickListener  {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showRandomImage()
+        buttonsVisibility()
+        sendMessageToFriend()
+    }
+
+    private fun showRandomImage() {
+        binding.btnRight.setOnClickListener {
             binding.imageView.setImageResource(R.drawable.stan)
             binding.txtName.text = R.string.stan.toString()
         }
@@ -31,12 +42,24 @@ class MainScreenFragment : Fragment() {
         binding.btnLeft.setOnClickListener {
             binding.imageView.setImageResource(R.drawable.georgi)
             binding.txtName.text = R.string.georgi.toString()
-
         }
     }
 
-    private fun buttonVisibility(){
-        if(binding.txtName.text == "Georgi")binding.btnLeft.visibility
-        else if (binding.txtName.text == "Stan")binding.btnRight.visibility
+    private fun buttonsVisibility() {
+        if (binding.txtName.text == "Georgi") binding.btnLeft.visibility
+        else if (binding.txtName.text == "Stan") binding.btnRight.visibility
+    }
+
+    private fun sendMessageToFriend() {
+        binding.email.setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SEND).apply {
+                type = R.string.type_email_intent.toString()
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(EMAIL))
+                putExtra(Intent.EXTRA_SUBJECT, SUBJECT)
+                putExtra(Intent.EXTRA_TEXT, MESSAGE)
+                putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", EMAIL, null))
+            }
+            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+        }
     }
 }
