@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Circular">
 
         <item name="cornerSize">50%</item>
+
+    </style>
+
+    <style name="ChipStyle">
+
+        <item name="chipBackgroundColor">@color/btn_reg_background</item>
+        <item name="chipCornerRadius">@dimen/radius</item>
 
     </style>
 

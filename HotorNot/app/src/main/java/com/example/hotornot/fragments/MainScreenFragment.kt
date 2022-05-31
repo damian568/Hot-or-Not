@@ -7,16 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.hotornot.Constants
+import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.R
+import com.example.hotornot.data.FriendGenerator
 import com.example.hotornot.databinding.FragmentMainScreenBinding
-
-const val EMAIL = "didi.milenov@gmail.com"
-const val SUBJECT = "Friends"
-const val MESSAGE = "Damian Tsvetkov :zdr bepce ko pr"
 
 class MainScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentMainScreenBinding
+    private lateinit var preferencesUtil: PreferencesUtil
+    private lateinit var friendGenerator: FriendGenerator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +29,18 @@ class MainScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        preferencesUtil = PreferencesUtil.getInstance(view.context)
         showRandomImage()
         buttonsVisibility()
         sendMessageToFriend()
+    }
+
+    private fun getFriends(){
+        preferencesUtil.getFriends()
+    }
+
+    private fun setFriends(){
+        preferencesUtil.setFriends(friendGenerator.generateFriendList())
     }
 
     private fun showRandomImage() {
@@ -53,11 +63,11 @@ class MainScreenFragment : Fragment() {
     private fun sendMessageToFriend() {
         binding.email.setOnClickListener {
             val emailIntent = Intent(Intent.ACTION_SEND).apply {
-                type = R.string.type_email_intent.toString()
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(EMAIL))
-                putExtra(Intent.EXTRA_SUBJECT, SUBJECT)
-                putExtra(Intent.EXTRA_TEXT, MESSAGE)
-                putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", EMAIL, null))
+                type = Constants.TYPE_EMAIL_INTENT
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(Constants.EMAIL))
+                putExtra(Intent.EXTRA_SUBJECT, Constants.SUBJECT)
+                putExtra(Intent.EXTRA_TEXT, Constants.MESSAGE)
+                putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", Constants.EMAIL, null))
             }
             startActivity(Intent.createChooser(emailIntent, "Send email..."))
         }

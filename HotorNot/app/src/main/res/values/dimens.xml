@@ -10,6 +10,10 @@
     <dimen name="xxsmall_margin_layout">5dp</dimen>
     <dimen name="large_margin">20dp</dimen>
     <dimen name="medium_margin">16dp</dimen>
+    <dimen name="xxxxl_margin">180dp</dimen>
+    <dimen name="text_size_xxlarge">80sp</dimen>
+    <dimen name="text_size_xlarge">40sp</dimen>
+    <dimen name="xlarge_margin">60dp</dimen>
 
     <dimen name="text_size_small">20sp</dimen>
     <dimen name="splash_text_size_large">30sp</dimen>

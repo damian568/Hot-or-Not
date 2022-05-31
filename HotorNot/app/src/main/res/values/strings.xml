@@ -30,20 +30,32 @@
         <item>Furries</item>
     </string-array>
 
-    <string name="return_text">Can\'t be empty!</string>
-    <string name="return_email_text">Invalid Email Address!</string>
+    <string name="i_am">I am</string>
 
-    <string name="image_text">image/*</string>
+    <string name="who_is_hot">Who Is \n HOT ?</string>
 
-    <string name="select_toast">You select </string>
-    <string name="error_toast">Please select one of our options!</string>
-    <string name="field_toast">Field is required!</string>
+    <string-array name="characteristics_array">
+        <item>@string/characteristic_traveling</item>
+        <item>@string/characteristic_techno_lover</item>
+        <item>@string/characteristic_animal_lover</item>
+        <item>@string/characteristic_training</item>
+        <item>@string/characteristic_reading</item>
+        <item>@string/characteristic_swimming</item>
+        <item>@string/characteristic_skiing</item>
+        <item>@string/characteristic_biking</item>
+        <item>@string/characteristic_boxing</item>
+        <item>@string/characteristic_fishing</item>
+    </string-array>
 
-    <string name="text_alert_dialog">Are you sure!</string>
-    <string name="question_alert_dialog">Do you want to close the app?</string>
-    <string name="yes_alert_dialog">Yes</string>
-    <string name="no_alert_dialog">No</string>
-
-    <string name="type_email_intent">"text/plain"</string>
+    <string name="characteristic_traveling">TRAVELING</string>
+    <string name="characteristic_techno_lover">TECHNO LOVER</string>
+    <string name="characteristic_animal_lover">ANIMAL LOVER</string>
+    <string name="characteristic_training">TRAINING</string>
+    <string name="characteristic_reading">READING</string>
+    <string name="characteristic_swimming">SWIMMING</string>
+    <string name="characteristic_skiing">SKIING</string>
+    <string name="characteristic_biking">BIKING</string>
+    <string name="characteristic_boxing">BOXING</string>
+    <string name="characteristic_fishing">FISHING</string>
 
 </resources>

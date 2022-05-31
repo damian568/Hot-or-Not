@@ -98,13 +98,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isBuildingAlertDialog(builder: AlertDialog.Builder){
-        builder.setTitle(R.string.text_alert_dialog.toString())
-        builder.setMessage(R.string.question_alert_dialog.toString())
-        builder.setPositiveButton(R.string.yes_alert_dialog.toString()) { _: DialogInterface, _: Int ->
+        builder.setTitle(Constants.TEXT_ALERT_DIALOG)
+        builder.setMessage(Constants.QUESTION_ALERT_DIALOG)
+        builder.setPositiveButton(Constants.YES_ALERT_DIALOG) { _: DialogInterface, _: Int ->
             preferencesUtil.deleteUser()
             finish()
         }
-        builder.setNegativeButton(R.string.no_alert_dialog.toString()) { _: DialogInterface, _: Int -> }
+        builder.setNegativeButton(Constants.NO_ALERT_DIALOG) { _: DialogInterface, _: Int -> }
         builder.show()
     }
 }
