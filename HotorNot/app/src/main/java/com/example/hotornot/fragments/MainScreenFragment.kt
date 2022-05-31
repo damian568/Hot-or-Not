@@ -30,6 +30,7 @@ class MainScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         preferencesUtil = PreferencesUtil.getInstance(view.context)
+        friendGenerator = FriendGenerator(requireContext())
         showRandomImage()
         buttonsVisibility()
         sendMessageToFriend()

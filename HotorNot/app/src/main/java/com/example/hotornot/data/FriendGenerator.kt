@@ -95,6 +95,6 @@ class FriendGenerator(private val context: Context) {
         val randomCharacteristics = context.resources.getStringArray(R.array.characteristics_array)
         val randomNumberOfCharacteristic: Int =
             (MIN_NUMBER_CHARACTERISTICS..randomCharacteristics.size).random()
-        return randomCharacteristics.toList().take(randomNumberOfCharacteristic)
+        return randomCharacteristics.toList().shuffled().take(randomNumberOfCharacteristic)
     }
 }
