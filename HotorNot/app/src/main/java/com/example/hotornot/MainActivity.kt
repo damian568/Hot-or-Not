@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
@@ -98,13 +99,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun isBuildingAlertDialog(builder: AlertDialog.Builder){
-        builder.setTitle(Constants.TEXT_ALERT_DIALOG)
-        builder.setMessage(Constants.QUESTION_ALERT_DIALOG)
-        builder.setPositiveButton(Constants.YES_ALERT_DIALOG) { _: DialogInterface, _: Int ->
+        builder.setTitle(getString(R.string.text_alert_dialog))
+        builder.setMessage(getString(R.string.question_alert_dialog))
+        builder.setPositiveButton(getString(R.string.yes_alert_dialog)) { _: DialogInterface, _: Int ->
             preferencesUtil.deleteUser()
             finish()
         }
-        builder.setNegativeButton(Constants.NO_ALERT_DIALOG) { _: DialogInterface, _: Int -> }
+        builder.setNegativeButton(getString(R.string.no_alert_dialog)) { _: DialogInterface, _: Int -> }
         builder.show()
+
+//        navController.currentDestination?.id =
     }
 }

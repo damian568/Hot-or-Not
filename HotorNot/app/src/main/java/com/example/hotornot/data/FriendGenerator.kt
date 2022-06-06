@@ -1,7 +1,11 @@
 package com.example.hotornot.data
 
 import android.content.Context
+import android.widget.Button
+import android.widget.TextView
 import com.example.hotornot.R
+import org.w3c.dom.Text
+import java.util.jar.Attributes
 
 private const val STRING_TO_HIDE_BUTTON_HOT = "Stan"
 private const val STRING_TO_HIDE_BUTTON_NOT = "Georgi"
@@ -87,7 +91,7 @@ class FriendGenerator(private val context: Context) {
                 email = "miro@gmail.com",
                 characteristics = getRandomCharacteristics(),
                 isHot = false
-            ),
+            )
         )
     }
 

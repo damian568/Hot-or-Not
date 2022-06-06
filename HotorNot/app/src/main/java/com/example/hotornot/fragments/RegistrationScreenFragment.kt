@@ -82,7 +82,7 @@ class RegistrationScreenFragment : Fragment() {
     private fun checkIsItEmptyFirstName(): String? {
         val firstName = binding.firstName.text.toString()
         if (TextUtils.isEmpty(firstName)) {
-            return Constants.RETURN_TEXT
+            return getString(R.string.return_text)
         }
         return null
     }
@@ -90,7 +90,7 @@ class RegistrationScreenFragment : Fragment() {
     private fun checkIsItEmptyLastName(): String? {
         val firstName = binding.lastName.text.toString()
         if (TextUtils.isEmpty(firstName)) {
-            return Constants.RETURN_TEXT
+            return getString(R.string.return_text)
         }
         return null
     }
@@ -98,7 +98,7 @@ class RegistrationScreenFragment : Fragment() {
     private fun checkIsItValidEmail(): String? {
         val emailText = binding.txtEmail.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-            return Constants.RETURN_EMAIL_TEXT
+            return getString(R.string.return_email_text)
         }
         return null
     }
@@ -130,13 +130,13 @@ class RegistrationScreenFragment : Fragment() {
 
     private fun showItemSelectedToast(position: Int) {
         Toast.makeText(requireContext(),
-            Constants.SELECT_TOAST + resources.getStringArray(R.array.interests)[position],
+            getString(R.string.select_toast) + resources.getStringArray(R.array.interests)[position],
             Toast.LENGTH_LONG).show()
     }
 
     private fun showErrorToastInInterests() {
         Toast.makeText(requireContext(),
-            Constants.ERROR_TOAST,
+            getString(R.string.error_toast),
             Toast.LENGTH_LONG).show()
     }
 
@@ -187,7 +187,7 @@ class RegistrationScreenFragment : Fragment() {
     }
 
     private fun showErrorToastVerification() {
-        Toast.makeText(this.context, Constants.FIELD_TOAST, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this.context, getString(R.string.field_toast), Toast.LENGTH_SHORT).show()
     }
 
     private fun goToMainScreenFragment() {
