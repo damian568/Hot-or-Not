@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var preferencesUtil: PreferencesUtil
     private var onPauseTime = 0
-    private var times = 2000
+    private var times = 600000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
