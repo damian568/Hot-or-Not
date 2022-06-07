@@ -3,13 +3,10 @@ package com.example.hotornot.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.hotornot.Constants
 import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.R
@@ -24,7 +21,6 @@ class MainScreenFragment : Fragment() {
     private lateinit var binding: FragmentMainScreenBinding
     private lateinit var preferencesUtil: PreferencesUtil
     private lateinit var friendGenerator: FriendGenerator
-    private var onPauseTime = 600000
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,30 +34,8 @@ class MainScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         preferencesUtil = PreferencesUtil.getInstance(view.context)
         friendGenerator = FriendGenerator(requireContext())
-        showRandomImage()
+        showRandomPerson()
         sendMessageToFriend()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        onPauseTime = System.currentTimeMillis().toInt()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        checkInactiveTime()
-    }
-
-    private fun checkInactiveTime(){
-        if ((System.currentTimeMillis() - onPauseTime) > 5000){
-            goToMotivationScreen()
-        }
-    }
-
-    private fun goToMotivationScreen() {
-        val action =
-            MainScreenFragmentDirections.actionMainScreenFragmentToMotivationFragment()
-        findNavController().navigate(action)
     }
 
     private fun getFriends(): Friend {
@@ -74,19 +48,19 @@ class MainScreenFragment : Fragment() {
         binding.imageView.setImageResource(randomFriend.imageResource)
         binding.txtName.text = randomFriend.name
         buttonsVisibility()
-//        setFriendCharacteristics(randomFriend.characteristics)
+        setFriendCharacteristics(randomFriend.characteristics)
     }
 
-//    private fun setFriendCharacteristics(characteristics: List<String>) {
-//        binding.chipGroup.removeAllViews()
-//        for (characteristic in characteristics) {
-//            val chip = Chip(activity)
-//            chip.text = characteristic
-//            binding.chipGroup.addView(chip)
-//        }
-//    }
+    private fun setFriendCharacteristics(characteristics: List<String>) {
+        binding.chipGroup.removeAllViews()
+        for (characteristic in characteristics) {
+            val chip = Chip(view?.context)
+            chip.text = characteristic
+            binding.chipGroup.addView(chip)
+        }
+    }
 
-    private fun showRandomImage() {
+    private fun showRandomPerson() {
         setFriends()
         binding.btnRight.setOnClickListener {
             getFriends()
