@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.hotornot.Constants
 import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.databinding.FragmentSplashScreenBinding
-
-const val DELAY_MILLS = 3000
+import kotlinx.android.synthetic.main.fragment_profile_screen.*
 
 class SplashScreenFragment : Fragment() {
 
@@ -40,7 +40,7 @@ class SplashScreenFragment : Fragment() {
             } else {
                 goToMainScreen()
             }
-        }, DELAY_MILLS.toLong())
+        }, Constants.DELAY_MILLS.toLong())
     }
 
     private fun goToMainScreen() {

@@ -15,11 +15,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.hotornot.databinding.ActivityMainBinding
+import com.example.hotornot.fragments.MotivationFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,24 +31,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var preferencesUtil: PreferencesUtil
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private var onPauseTime = 0
+    private var times = 600000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preferencesUtil = PreferencesUtil.getInstance(applicationContext)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
-        loadingFragments()
-    }
-
-    private fun loadingFragments(){
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         val navHostFragment =
-            supportFragmentManager
-                .findFragmentById(R.id.navHostFragment) as NavHostFragment
-        navController = navHostFragment.findNavController()
-
-        setSupportActionBar(toolbar)
-        setupActionBarWithNavController(navController)
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navController = navHostFragment.navController
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+        supportActionBar?.hide()
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
@@ -54,27 +55,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("RestrictedApi")
-    private fun setIconInMenu(menu: Menu?){
+    private fun setIconInMenu(menu: Menu?) {
         if (menu is MenuBuilder) {
             menu.setOptionalIconsVisible(true)
         }
     }
 
-    private fun setColorOnIcon(menu: Menu?){
+    private fun setColorOnIcon(menu: Menu?) {
         menu?.apply {
-            for(index in 0 until this.size()){
+            for (index in 0 until this.size()) {
                 val item = this.getItem(index)
                 setColorItem(item)
             }
         }
     }
 
-    private fun setColorItem(item: MenuItem){
+    private fun setColorItem(item: MenuItem) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             item.icon.colorFilter = BlendModeColorFilter(
                 Color.BLUE, BlendMode.SRC_IN
             )
-        }else{
+        } else {
             item.icon.setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN)
         }
     }
@@ -97,14 +98,33 @@ class MainActivity : AppCompatActivity() {
         isBuildingAlertDialog(builder)
     }
 
-    private fun isBuildingAlertDialog(builder: AlertDialog.Builder){
-        builder.setTitle(R.string.text_alert_dialog.toString())
-        builder.setMessage(R.string.question_alert_dialog.toString())
-        builder.setPositiveButton(R.string.yes_alert_dialog.toString()) { _: DialogInterface, _: Int ->
+    private fun isBuildingAlertDialog(builder: AlertDialog.Builder) {
+        builder.setTitle(getString(R.string.text_alert_dialog))
+        builder.setMessage(getString(R.string.question_alert_dialog))
+        builder.setPositiveButton(getString(R.string.yes_alert_dialog)) { _: DialogInterface, _: Int ->
             preferencesUtil.deleteUser()
             finish()
         }
-        builder.setNegativeButton(R.string.no_alert_dialog.toString()) { _: DialogInterface, _: Int -> }
+        builder.setNegativeButton(getString(R.string.no_alert_dialog)) { _: DialogInterface, _: Int -> }
         builder.show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onPauseTime = System.currentTimeMillis().toInt()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkInactiveTime()
+    }
+
+    private fun checkInactiveTime() {
+        if ((System.currentTimeMillis() - onPauseTime) > times) {
+            val navigate = Navigation.findNavController(this, R.id.navHostFragment)
+            if (navController.currentDestination?.id != R.id.spashScreenFragment) {
+                navigate.navigate(R.id.motivationFragment)
+            }
+        }
     }
 }

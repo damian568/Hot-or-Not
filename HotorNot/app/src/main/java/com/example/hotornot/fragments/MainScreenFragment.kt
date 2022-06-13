@@ -3,20 +3,24 @@ package com.example.hotornot.fragments
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.hotornot.Constants
+import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.R
+import com.example.hotornot.data.Friend
+import com.example.hotornot.data.FriendGenerator
+import com.example.hotornot.data.User
 import com.example.hotornot.databinding.FragmentMainScreenBinding
-
-const val EMAIL = "didi.milenov@gmail.com"
-const val SUBJECT = "Friends"
-const val MESSAGE = "Damian Tsvetkov :zdr bepce ko pr"
+import com.google.android.material.chip.Chip
 
 class MainScreenFragment : Fragment() {
 
     private lateinit var binding: FragmentMainScreenBinding
+    private lateinit var preferencesUtil: PreferencesUtil
+    private lateinit var friendGenerator: FriendGenerator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,38 +32,72 @@ class MainScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showRandomImage()
-        buttonsVisibility()
+        preferencesUtil = PreferencesUtil.getInstance(view.context)
+        friendGenerator = FriendGenerator(requireContext())
+        showRandomPerson()
         sendMessageToFriend()
     }
 
-    private fun showRandomImage() {
+    private fun getFriends(): Friend {
+        setFriends()
+        return friendGenerator.generateFriendList().random()
+    }
+
+    private fun setFriends() {
+        val randomFriend = friendGenerator.generateFriendList().random()
+        binding.imageView.setImageResource(randomFriend.imageResource)
+        binding.txtName.text = randomFriend.name
+        buttonsVisibility()
+        setFriendCharacteristics(randomFriend.characteristics)
+    }
+
+    private fun setFriendCharacteristics(characteristics: List<String>) {
+        binding.chipGroup.removeAllViews()
+        for (characteristic in characteristics) {
+            val chip = Chip(view?.context)
+            chip.text = characteristic
+            binding.chipGroup.addView(chip)
+        }
+    }
+
+    private fun showRandomPerson() {
+        setFriends()
         binding.btnRight.setOnClickListener {
-            binding.imageView.setImageResource(R.drawable.stan)
-            binding.txtName.text = R.string.stan.toString()
+            getFriends()
         }
 
         binding.btnLeft.setOnClickListener {
-            binding.imageView.setImageResource(R.drawable.georgi)
-            binding.txtName.text = R.string.georgi.toString()
+            getFriends()
         }
     }
 
     private fun buttonsVisibility() {
-        if (binding.txtName.text == "Georgi") binding.btnLeft.visibility
-        else if (binding.txtName.text == "Stan") binding.btnRight.visibility
+        when (binding.txtName.text) {
+            "Georgi" -> binding.btnLeft.visibility = View.INVISIBLE
+            "Stan" -> binding.btnRight.visibility = View.INVISIBLE
+            else -> {
+                binding.btnLeft.visibility = View.VISIBLE
+                binding.btnRight.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun sendMessageToFriend() {
         binding.email.setOnClickListener {
-            val emailIntent = Intent(Intent.ACTION_SEND).apply {
-                type = R.string.type_email_intent.toString()
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(EMAIL))
-                putExtra(Intent.EXTRA_SUBJECT, SUBJECT)
-                putExtra(Intent.EXTRA_TEXT, MESSAGE)
-                putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", EMAIL, null))
-            }
-            startActivity(Intent.createChooser(emailIntent, "Send email..."))
+            val user = preferencesUtil.getUserData()
+            user?.let { setEmailMessage(it) }
+            setEmailMessage(user)
         }
+    }
+
+    private fun setEmailMessage(user: User?) {
+        val emailIntent = Intent(Intent.ACTION_SEND).apply {
+            type = getString(R.string.type_email_intent)
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(user?.email))
+            putExtra(Intent.EXTRA_SUBJECT, Constants.SUBJECT)
+            putExtra(Intent.EXTRA_TEXT, user?.firstName + " " + user?.lastName + Constants.MESSAGE)
+            putExtra(Intent.EXTRA_STREAM, Uri.fromParts("mailto", Constants.EMAIL, null))
+        }
+        startActivity(Intent.createChooser(emailIntent, "Send email..."))
     }
 }

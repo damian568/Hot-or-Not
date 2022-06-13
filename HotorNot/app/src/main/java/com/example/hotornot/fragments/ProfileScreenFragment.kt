@@ -4,9 +4,9 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.example.hotornot.Constants
 import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.R
 import com.example.hotornot.data.User
@@ -47,7 +47,7 @@ class ProfileScreenFragment : Fragment() {
 
     private fun pickImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK)
-        intent.type = R.string.image_text.toString()
+        intent.type = getString(R.string.image_text)
         openGalleryInNewActivity(intent)
     }
 
