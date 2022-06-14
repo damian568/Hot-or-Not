@@ -61,55 +61,17 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
-                <!--                <com.google.android.material.chip.ChipGroup-->
-                <!--                    android:id="@+id/chipGroup"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="@dimen/small_margin"-->
-                <!--                    android:clickable="false"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@+id/email"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent">-->
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    card_view:layout_constraintTop_toBottomOf="@id/email"
+                    card_view:layout_constraintStart_toStartOf="parent">
 
-                <!--                    <com.google.android.material.chip.Chip-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:clickable="false"/>-->
-                <!--                </com.google.android.material.chip.ChipGroup>-->
-                <!--                <HorizontalScrollView-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    card_view:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    card_view:layout_constraintStart_toStartOf="parent"-->
-                <!--                    card_view:layout_constraintTop_toBottomOf="@id/email">-->
-
-                <!--                    <com.google.android.material.chip.ChipGroup-->
-                <!--                        android:id="@+id/chipGroup"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:padding="@dimen/small_margin"-->
-                <!--                        card_view:singleLine="true"-->
-                <!--                        android:focusable="false"-->
-                <!--                        android:clickable="false">-->
-
-                <!--                    </com.google.android.material.chip.ChipGroup>-->
-
-                <!--                </HorizontalScrollView>-->
-
-                <!--                <com.google.android.material.chip.ChipGroup-->
-                <!--                    android:id="@+id/chipGroup"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_margin="@dimen/medium_margin"-->
-                <!--                    android:clickable="false"-->
-                <!--                    card_view:singleLine="true"-->
-                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/email">-->
-
-                <!--                    <com.google.android.material.chip.Chip-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content" />-->
-                <!--                </com.google.android.material.chip.ChipGroup>-->
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </com.google.android.material.chip.ChipGroup>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

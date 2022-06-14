@@ -3,6 +3,7 @@ package com.example.hotornot.data
 import android.content.Context
 import android.widget.Button
 import android.widget.TextView
+import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.R
 import org.w3c.dom.Text
 import java.util.jar.Attributes

@@ -1,5 +1,8 @@
 package com.example.hotornot.data
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Friend(
     val imageResource: Int,
     val name: String,
