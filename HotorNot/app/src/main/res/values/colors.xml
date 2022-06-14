@@ -13,4 +13,5 @@
     <color name="btn_reg_background">#1e3c72</color>
     <color name="dark_blue_background">#330867</color>
     <color name="light_blue_background">#30cfd0</color>
+    <color name="blue">#0000FF</color>
 </resources>

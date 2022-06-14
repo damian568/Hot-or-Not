@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_mainScreenFragment_to_profileScreenFragment"
             app:destination="@id/profileScreenFragment" />
+        <action
+            android:id="@+id/action_mainScreenFragment_to_motivationFragment"
+            app:destination="@id/motivationFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationScreenFragment"
@@ -40,4 +43,8 @@
             android:id="@+id/action_profileScreenFragment_to_mainScreenFragment"
             app:destination="@id/mainScreenFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/motivationFragment"
+        android:name="com.example.hotornot.fragments.MotivationFragment"
+        android:label="MotivationFragment" />
 </navigation>
