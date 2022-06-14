@@ -73,8 +73,8 @@ class MainScreenFragment : Fragment() {
 
     private fun buttonsVisibility() {
         when (binding.txtName.text) {
-            "Georgi" -> binding.btnLeft.visibility = View.INVISIBLE
-            "Stan" -> binding.btnRight.visibility = View.INVISIBLE
+            Constants.STRING_TO_HIDE_BUTTON_NOT -> binding.btnLeft.visibility = View.INVISIBLE
+            Constants.STRING_TO_HIDE_BUTTON_HOT -> binding.btnRight.visibility = View.INVISIBLE
             else -> {
                 binding.btnLeft.visibility = View.VISIBLE
                 binding.btnRight.visibility = View.VISIBLE
