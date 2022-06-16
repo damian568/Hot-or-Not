@@ -3,14 +3,11 @@ package com.example.hotornot.data
 import android.content.Context
 import android.widget.Button
 import android.widget.TextView
+import com.example.hotornot.Constants
 import com.example.hotornot.PreferencesUtil
 import com.example.hotornot.R
 import org.w3c.dom.Text
 import java.util.jar.Attributes
-
-private const val STRING_TO_HIDE_BUTTON_HOT = "Stan"
-private const val STRING_TO_HIDE_BUTTON_NOT = "Georgi"
-private const val MIN_NUMBER_CHARACTERISTICS = 3
 
 class FriendGenerator(private val context: Context) {
 
@@ -18,14 +15,14 @@ class FriendGenerator(private val context: Context) {
         return listOf(
             Friend(
                 imageResource = R.drawable.stan,
-                name = STRING_TO_HIDE_BUTTON_HOT,
+                name = Constants.STRING_TO_HIDE_BUTTON_HOT,
                 email = "stan@gmail.com",
                 characteristics = getRandomCharacteristics(),
                 isHot = true
             ),
             Friend(
                 imageResource = R.drawable.georgi,
-                name = STRING_TO_HIDE_BUTTON_NOT,
+                name = Constants.STRING_TO_HIDE_BUTTON_NOT,
                 email = "georgi@gmail.com",
                 characteristics = getRandomCharacteristics(),
                 isHot = false
@@ -99,7 +96,7 @@ class FriendGenerator(private val context: Context) {
     private fun getRandomCharacteristics(): List<String> {
         val randomCharacteristics = context.resources.getStringArray(R.array.characteristics_array)
         val randomNumberOfCharacteristic: Int =
-            (MIN_NUMBER_CHARACTERISTICS..randomCharacteristics.size).random()
+            (Constants.MIN_NUMBER_CHARACTERISTICS..randomCharacteristics.size).random()
         return randomCharacteristics.toList().shuffled().take(randomNumberOfCharacteristic)
     }
 }
