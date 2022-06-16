@@ -40,15 +40,16 @@ class MainScreenFragment : Fragment() {
 
     private fun getFriends(): Friend {
         setFriends()
-        return friendGenerator.generateFriendList().random()
+        val friend = preferencesUtil.getFriends().random()
+        binding.imageView.setImageResource(friend.imageResource)
+        binding.txtName.text = friend.name
+        setFriendCharacteristics(friend.characteristics)
+        return friend
     }
 
     private fun setFriends() {
-        val randomFriend = friendGenerator.generateFriendList().random()
-        binding.imageView.setImageResource(randomFriend.imageResource)
-        binding.txtName.text = randomFriend.name
+        preferencesUtil.setFriends(friendGenerator.generateFriendList())
         buttonsVisibility()
-        setFriendCharacteristics(randomFriend.characteristics)
     }
 
     private fun setFriendCharacteristics(characteristics: List<String>) {
