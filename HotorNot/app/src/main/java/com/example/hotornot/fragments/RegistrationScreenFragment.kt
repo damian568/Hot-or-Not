@@ -5,18 +5,19 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Patterns
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.hotornot.*
 import com.example.hotornot.data.User
-import com.example.hotornot.enums.Gender
 import com.example.hotornot.databinding.FragmentRegistrationScreenBinding
+import com.example.hotornot.enums.Gender
+import java.util.*
 
 class RegistrationScreenFragment : Fragment() {
 
@@ -35,11 +36,23 @@ class RegistrationScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         preferencesUtil = PreferencesUtil.getInstance(view.context)
         setLogoImage()
+        setBulgariaLogo()
         onFirstNameTextChangeListener()
         onLastNameTextChangeListener()
         onEmailTextChangeListener()
         showInterests()
         registerUser()
+    }
+
+    private fun setBulgariaLogo(){
+        val languageName: String = Locale.getDefault().language
+        binding.imgBulgaria.setImageResource(R.drawable.bulgaria)
+        if(languageName == "bg"){
+            binding.imgBulgaria.visibility = View.VISIBLE
+        }
+        else{
+            binding.imgBulgaria.visibility = View.GONE
+        }
     }
 
     private fun setLogoImage() {
@@ -130,7 +143,7 @@ class RegistrationScreenFragment : Fragment() {
 
     private fun showItemSelectedToast(position: Int) {
         Toast.makeText(requireContext(),
-            getString(R.string.select_toast) + resources.getStringArray(R.array.interests)[position],
+            getString(R.string.select_toast) + " " + resources.getStringArray(R.array.interests)[position],
             Toast.LENGTH_LONG).show()
     }
 

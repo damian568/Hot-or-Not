@@ -23,12 +23,18 @@
     <string name="profile">Profile</string>
 
     <string-array name="interests">
-        <item>Apache Helicopters</item>
-        <item>Males</item>
-        <item>Females</item>
-        <item>Drag Queens</item>
-        <item>Furries</item>
+        <item>@string/interests_apache_helicopters</item>
+        <item>@string/interests_males</item>
+        <item>@string/interests_females</item>
+        <item>@string/interests_drag_queens</item>
+        <item>@string/interests_furries</item>
     </string-array>
+
+    <string name="interests_apache_helicopters">Apache Helicopters</string>
+    <string name="interests_males">Males</string>
+    <string name="interests_females">Females</string>
+    <string name="interests_drag_queens">Drag Queens</string>
+    <string name="interests_furries">Furries</string>
 
     <string name="return_text">Can\'t be empty!</string>
     <string name="return_email_text">Invalid Email Address!</string>
@@ -47,7 +53,7 @@
     <string name="type_email_intent">"text/plain"</string>
 
     <string name="i_am">I am</string>
-    <string name="who_is_hot">Who Is \n HOT ?</string>
+    <string name="who_is_hot">Who Is   HOT ?</string>
     <string name="cant_run_from_yourself">Can\'t run from yourself!!</string>
 
     <string-array name="characteristics_array">
